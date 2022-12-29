@@ -91,8 +91,6 @@ trait Update
      */
     public function setWebhook(array $params): bool
     {
-        $this->validateHookUrl($params['url']);
-
         if (isset($params['certificate'])) {
             $params['certificate'] = $this->formatCertificate($params['certificate']);
 
