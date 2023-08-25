@@ -210,7 +210,7 @@ abstract class BaseObject extends Collection
     public function __call($name, $arguments)
     {
         if (! Str::startsWith($name, 'get')) {
-            return false;
+            return parent::__call($name, $arguments);
         }
         $property = substr($name, 3);
 
