@@ -63,8 +63,25 @@ class TelegramResponseException extends TelegramSDKException
             $message = $data['description'] ?? 'Unknown error from API.';
         }
 
-        // Others
-        return new static($response, new TelegramOtherException($message, $code));
+        $has = fn(string $words) => str_contains($message, $words);
+
+        $exception = match (true) {
+            $has('message to copy not found') => MessageToCopyNotFoundException::class,
+            $has('message to edit not found') => MessageToEditNotFoundException::class,
+            $has('blocked by the user') => BotBlockedByUserException::class,
+            $has('user is deactivated') => UserDeactivatedException::class,
+            $has('too long') || $has('_TOO_LONG') => TextTooLongException::class,
+            $has('Too Many Requests') => TooManyRequestException::class,
+            $has('user not found') => UserNotFoundException::class,
+            $has('chat not found') => ChatNotFoundException::class,
+            $has('message to delete not found') => MessageToDeleteNotFoundException::class,
+            $has('message to forward not found') => MessageToForwardNotFoundException::class,
+            $has('query is too old') => QueryOldException::class,
+            $has('reply markup are exactly the same') => MessageMarkupIdenticalException::class,
+            default => static::class
+        };
+
+        return new $exception($response, new TelegramOtherException($message, $code));
     }
 
     /**
