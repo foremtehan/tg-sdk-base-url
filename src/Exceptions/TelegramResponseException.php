@@ -70,7 +70,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('message to edit not found') => MessageToEditNotFoundException::class,
             $has('blocked by the user') => BotBlockedByUserException::class,
             $has('user is deactivated') => UserDeactivatedException::class,
-            $has('too long') || $has('_TOO_LONG') => TextTooLongException::class,
+            $has('message is too long') || $has('caption is too long') || $has('_TOO_LONG') => TextTooLongException::class,
             $has('Too Many Requests') => TooManyRequestException::class,
             $has('user not found') => UserNotFoundException::class,
             $has('chat not found') => ChatNotFoundException::class,
