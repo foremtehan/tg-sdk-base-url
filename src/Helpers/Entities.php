@@ -16,8 +16,7 @@ class Entities
 
     /**
      * Entities constructor.
-     *
-     * @param  string  $text
+     * @param string $text
      */
     public function __construct(string $text)
     {
@@ -25,8 +24,7 @@ class Entities
     }
 
     /**
-     * @param  string  $text
-     *
+     * @param string $text
      * @return static
      */
     public static function format(string $text): self
@@ -35,8 +33,7 @@ class Entities
     }
 
     /**
-     * @param  array  $entities
-     *
+     * @param array $entities
      * @return $this
      */
     public function withEntities(array $entities): self
@@ -48,7 +45,6 @@ class Entities
 
     /**
      * Format it to markdown style.
-     *
      * @return string
      */
     public function toMarkdown(): string
@@ -60,7 +56,6 @@ class Entities
 
     /**
      * Format it to HTML syntax.
-     *
      * @return string
      */
     public function toHTML(): string
@@ -72,7 +67,6 @@ class Entities
 
     /**
      * Apply format for given text and entities.
-     *
      * @return mixed|string
      */
     protected function apply()
@@ -88,15 +82,41 @@ class Entities
                 default => sprintf($syntax[$type][$this->mode], $value),
             };
 
-            $this->text = substr_replace($this->text, $replacement, $entity['offset'], $entity['length']);
+            $this->text = $this->substrReplace($this->text, $replacement, $entity['offset'], $entity['length']);
         }
 
         return $this->text;
     }
 
+    function substrReplace($string, $replacement, $start, $length = null, $encoding = null)
+    {
+        $string_length = (is_null($encoding) === true) ? mb_strlen($string) : mb_strlen($string, $encoding);
+
+        if ($start < 0) {
+            $start = max(0, $string_length + $start);
+        } else if ($start > $string_length) {
+            $start = $string_length;
+        }
+
+        if ($length < 0) {
+            $length = max(0, $string_length - $start + $length);
+        } else if ((is_null($length) === true) || ($length > $string_length)) {
+            $length = $string_length;
+        }
+
+        if (($start + $length) > $string_length) {
+            $length = $string_length - $start;
+        }
+
+        if (is_null($encoding) === true) {
+            return mb_substr($string, 0, $start).$replacement.mb_substr($string, $start + $length, $string_length - $start - $length);
+        }
+
+        return mb_substr($string, 0, $start, $encoding).$replacement.mb_substr($string, $start + $length, $string_length - $start - $length, $encoding);
+    }
+
     /**
      * Formatting Syntax.
-     *
      * @return array
      */
     protected function syntax(): array
@@ -114,7 +134,7 @@ class Entities
             'text_link' => ['[%s](%s)', '<a href="%2$s">%1$s</a>'],
             'underline' => ['_%s_', '<u>%s</u>'],
             'strikethrough' => ['~%s~', '<s>%s</s>'],
-            'block_quote'    => ['>%s', '<blockquote>%s</blockquote>'],
+            'block_quote' => ['>%s', '<blockquote>%s</blockquote>'],
         ];
     }
 }
