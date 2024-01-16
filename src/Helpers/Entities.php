@@ -82,37 +82,10 @@ class Entities
                 default => sprintf($syntax[$type][$this->mode], $value),
             };
 
-            $this->text = $this->substrReplace($this->text, $replacement, $entity['offset'], $entity['length']);
+            $this->text = substr_replace($this->text, $replacement, $entity['offset'], $entity['length']);
         }
 
         return $this->text;
-    }
-
-    function substrReplace($string, $replacement, $start, $length = null, $encoding = null)
-    {
-        $string_length = (is_null($encoding) === true) ? mb_strlen($string) : mb_strlen($string, $encoding);
-
-        if ($start < 0) {
-            $start = max(0, $string_length + $start);
-        } else if ($start > $string_length) {
-            $start = $string_length;
-        }
-
-        if ($length < 0) {
-            $length = max(0, $string_length - $start + $length);
-        } else if ((is_null($length) === true) || ($length > $string_length)) {
-            $length = $string_length;
-        }
-
-        if (($start + $length) > $string_length) {
-            $length = $string_length - $start;
-        }
-
-        if (is_null($encoding) === true) {
-            return mb_substr($string, 0, $start).$replacement.mb_substr($string, $start + $length, $string_length - $start - $length);
-        }
-
-        return mb_substr($string, 0, $start, $encoding).$replacement.mb_substr($string, $start + $length, $string_length - $start - $length, $encoding);
     }
 
     /**
