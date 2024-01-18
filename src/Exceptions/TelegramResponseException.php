@@ -78,6 +78,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('message to forward not found') => MessageToForwardNotFoundException::class,
             $has('query is too old') => QueryOldException::class,
             $has('reply markup are exactly the same') => MessageMarkupIdenticalException::class,
+            $has('message to reply not found') => MessageToReplyNotFoundException::class,
             $message == 'Unauthorized' => UnauthorizedException::class,
             default => static::class
         };
