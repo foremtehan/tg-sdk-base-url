@@ -74,7 +74,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('Too Many Requests') => TooManyRequestException::class,
             $has('user not found') => UserNotFoundException::class,
             $has('chat not found') => ChatNotFoundException::class,
-            $has('message to delete not found') => MessageToDeleteNotFoundException::class,
+            $has('message to delete not found') || $has('deleted for everyone') => MessageToDeleteNotFoundException::class,
             $has('message to forward not found') => MessageToForwardNotFoundException::class,
             $has('query is too old') => QueryOldException::class,
             $has('reply markup are exactly the same') => MessageMarkupIdenticalException::class,
