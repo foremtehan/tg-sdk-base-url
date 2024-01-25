@@ -80,6 +80,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('reply markup are exactly the same') => MessageMarkupIdenticalException::class,
             $has('message to reply not found') => MessageToReplyNotFoundException::class,
             $has('message to react not found') => MessageToReactNotFoundException::class,
+            $has('no write access') => NoWriteAccessException::class,
             $message == 'Unauthorized' => UnauthorizedException::class,
             default => static::class
         };
