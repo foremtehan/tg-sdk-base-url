@@ -81,6 +81,8 @@ class TelegramResponseException extends TelegramSDKException
             $has('message to reply not found') => MessageToReplyNotFoundException::class,
             $has('message to react not found') => MessageToReactNotFoundException::class,
             $has("message can't be forwarded") => MessageCantBeForwardedException::class,
+            $has("message can't be copied") => MessageCantBeCopiedException::class,
+            $has("VOICE_MESSAGES_FORBIDDEN") => VoiceMessageForbiddenException::class,
             $has('no write access') => NoWriteAccessException::class,
             $message == 'Unauthorized' => UnauthorizedException::class,
             default => static::class
