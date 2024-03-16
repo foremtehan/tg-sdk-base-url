@@ -84,7 +84,7 @@ class TelegramResponseException extends TelegramSDKException
             $has("message can't be copied") => MessageCantBeCopiedException::class,
             $has("VOICE_MESSAGES_FORBIDDEN") => VoiceMessageForbiddenException::class,
             $has('no write access') => NoWriteAccessException::class,
-            $message == 'Unauthorized' => UnauthorizedException::class,
+            $message == 'Unauthorized' || $has('SESSION_REVOKED') => UnauthorizedException::class,
             default => static::class
         };
 
