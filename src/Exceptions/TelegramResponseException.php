@@ -18,7 +18,7 @@ class TelegramResponseException extends TelegramSDKException
     /**
      * Creates a TelegramResponseException.
      *
-     * @param TelegramResponse     $response          The response that threw the exception.
+     * @param TelegramResponse $response The response that threw the exception.
      * @param TelegramSDKException $previousException The more detailed exception.
      */
     public function __construct(TelegramResponse $response, TelegramSDKException $previousException = null)
@@ -36,7 +36,7 @@ class TelegramResponseException extends TelegramSDKException
      * Checks isset and returns that or a default value.
      *
      * @param string $key
-     * @param mixed  $default
+     * @param mixed $default
      *
      * @return mixed
      */
@@ -85,6 +85,7 @@ class TelegramResponseException extends TelegramSDKException
             $has("VOICE_MESSAGES_FORBIDDEN") => VoiceMessageForbiddenException::class,
             $has('no write access') => NoWriteAccessException::class,
             $has('kicked from the supergroup') || $has('kicked from the group') => BotKickedFromGroupException::class,
+            $has('kicked from the channel') => BotKickedFromChannelException::class,
             $message == 'Unauthorized' || $has('SESSION_REVOKED') => UnauthorizedException::class,
             default => static::class
         };
