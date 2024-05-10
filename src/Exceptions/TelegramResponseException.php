@@ -67,7 +67,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('message to copy not found') => MessageToCopyNotFoundException::class,
             $has('message to edit not found') => MessageToEditNotFoundException::class,
             $has('blocked by the user') => BotBlockedByUserException::class,
-            $has('user is deactivated') || $has('USER_DEACTIVATED') => UserDeactivatedException::class,
+            $has('user is deactivated') => UserDeactivatedException::class,
             $has('message is too long') || $has('caption is too long') || $has('_TOO_LONG') => TextTooLongException::class,
             $has('Too Many Requests') => TooManyRequestException::class,
             $has('user not found') => UserNotFoundException::class,
@@ -86,7 +86,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('kicked from the channel') => BotKickedFromChannelException::class,
             $has('QUOTE_TEXT_INVALID') => QuoteInvalidException::class,
             $has('not enough rights') => NotEnoughRightsException::class,
-            $message == 'Unauthorized' || $has('SESSION_REVOKED') => UnauthorizedException::class,
+            $message == 'Unauthorized' || $has('SESSION_REVOKED') || $has('USER_DEACTIVATED') => UnauthorizedException::class,
             default => static::class
         };
 
