@@ -85,6 +85,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('kicked from the supergroup') || $has('kicked from the group') => BotKickedFromGroupException::class,
             $has('kicked from the channel') => BotKickedFromChannelException::class,
             $has('QUOTE_TEXT_INVALID') => QuoteInvalidException::class,
+            $has('initiate') => BotCantInitiateConversationException::class,
             $has('not enough rights') || $has('member list is inaccessible') => NotEnoughRightsException::class,
             $message == 'Unauthorized' || $has('SESSION_REVOKED') || $has('USER_DEACTIVATED') => UnauthorizedException::class,
             default => static::class
