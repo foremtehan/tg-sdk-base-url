@@ -372,7 +372,7 @@ trait Http
             $this->getAccessToken(),
             $method,
             $endpoint,
-            $this->params ? array_merge($this->params, $params) : $params,
+            $params,
             $this->isAsyncRequest()
         ))
             ->setTimeOut($this->getTimeOut())
@@ -405,6 +405,10 @@ trait Http
      */
     private function normalizeParams(array $params, $fileUpload)
     {
+        if ($this->params) {
+           $params = array_merge($params, $this->params);
+        }
+
         if ($fileUpload) {
             return ['multipart' => $params];
         }
