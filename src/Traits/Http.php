@@ -41,6 +41,9 @@ trait Http
     /** @var TelegramResponse|null Stores the last request made to Telegram Bot API. */
     protected $lastResponse;
 
+    /** @var array Default parameters for the request. */
+    protected $params;
+
     /**
      * Set Http Client Handler.
      *
@@ -69,6 +72,13 @@ trait Http
         return $this->client;
     }
 
+    public function setParams(array $items)
+    {
+        $this->params = $items;
+
+        return $this;
+    }
+
     /**
      * Returns the last response returned from API request.
      *
@@ -82,8 +92,8 @@ trait Http
     /**
      * Download a file from Telegram server by file ID.
      *
-     * @param File|BaseObject|string $file     Telegram File Instance / File Response Object or File ID.
-     * @param string                 $filename Absolute path to dir or filename to save as.
+     * @param File|BaseObject|string $file Telegram File Instance / File Response Object or File ID.
+     * @param string $filename Absolute path to dir or filename to save as.
      *
      * @throws TelegramSDKException
      *
@@ -112,7 +122,7 @@ trait Http
         // No filename provided.
         if (pathinfo($filename, PATHINFO_EXTENSION) === '') {
             // Attempt to use the original file name if there is one or fallback to the file_path filename.
-            $filename .= DIRECTORY_SEPARATOR . ($originalFilename ?: basename($file->file_path));
+            $filename .= DIRECTORY_SEPARATOR.($originalFilename ?: basename($file->file_path));
         }
 
         return $this->getClient()->download($file->file_path, $filename);
@@ -210,7 +220,7 @@ trait Http
      * Sends a GET request to Telegram Bot API and returns the result.
      *
      * @param string $endpoint
-     * @param array  $params
+     * @param array $params
      *
      * @throws TelegramSDKException
      *
@@ -227,8 +237,8 @@ trait Http
      * Sends a POST request to Telegram Bot API and returns the result.
      *
      * @param string $endpoint
-     * @param array  $params
-     * @param bool   $fileUpload Set true if a file is being uploaded.
+     * @param array $params
+     * @param bool $fileUpload Set true if a file is being uploaded.
      *
      * @throws TelegramSDKException
      * @return TelegramResponse
@@ -261,7 +271,7 @@ trait Http
      * Used primarily for file uploads.
      *
      * @param string $endpoint
-     * @param array  $params
+     * @param array $params
      * @param string $inputFileField
      *
      * @throws CouldNotUploadInputFile
@@ -286,7 +296,7 @@ trait Http
     /**
      * Prepare Multipart Params for File Upload.
      *
-     * @param array  $params
+     * @param array $params
      * @param string $inputFileField
      *
      * @throws CouldNotUploadInputFile
@@ -312,7 +322,7 @@ trait Http
     /**
      * Generates the multipart data required when sending files to telegram.
      *
-     * @param mixed  $contents
+     * @param mixed $contents
      * @param string $name
      *
      * @return array
@@ -334,7 +344,7 @@ trait Http
      *
      * @param string $method
      * @param string $endpoint
-     * @param array  $params
+     * @param array $params
      *
      * @throws TelegramSDKException
      *
@@ -352,7 +362,7 @@ trait Http
      *
      * @param string $method
      * @param string $endpoint
-     * @param array  $params
+     * @param array $params
      *
      * @return TelegramRequest
      */
@@ -362,7 +372,7 @@ trait Http
             $this->getAccessToken(),
             $method,
             $endpoint,
-            $params,
+            $this->params ? array_merge($this->params, $params) : $params,
             $this->isAsyncRequest()
         ))
             ->setTimeOut($this->getTimeOut())
