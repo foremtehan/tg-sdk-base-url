@@ -406,7 +406,7 @@ trait Http
     private function normalizeParams(array $params, $fileUpload)
     {
         if ($this->params) {
-           $params = array_merge($params, $this->params);
+           $params = array_merge($this->params, $params);
         }
 
         if ($fileUpload) {
