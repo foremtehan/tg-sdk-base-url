@@ -84,6 +84,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('no write access') => NoWriteAccessException::class,
             $has('kicked from the supergroup') || $has('kicked from the group') => BotKickedFromGroupException::class,
             $has('kicked from the channel') => BotKickedFromChannelException::class,
+            $has('not a member of') => BotNotMemberOfChatException::class,
             $has('QUOTE_TEXT_INVALID') => QuoteInvalidException::class,
             $has('initiate') => BotCantInitiateConversationException::class,
             $has('not enough rights') || $has('member list is inaccessible') => NotEnoughRightsException::class,
