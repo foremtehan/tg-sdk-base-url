@@ -226,7 +226,7 @@ trait Http
      *
      * @return TelegramResponse
      */
-    protected function get(string $endpoint, array $params = []): TelegramResponse
+    public function get(string $endpoint, array $params = []): TelegramResponse
     {
         $params = $this->replyMarkupToString($params);
 
@@ -243,7 +243,7 @@ trait Http
      * @throws TelegramSDKException
      * @return TelegramResponse
      */
-    protected function post(string $endpoint, array $params = [], $fileUpload = false): TelegramResponse
+    public function post(string $endpoint, array $params = [], $fileUpload = false): TelegramResponse
     {
         $params = $this->normalizeParams($params, $fileUpload);
 
@@ -350,7 +350,7 @@ trait Http
      *
      * @return TelegramResponse
      */
-    protected function sendRequest($method, $endpoint, array $params = []): TelegramResponse
+    public function sendRequest($method, $endpoint, array $params = []): TelegramResponse
     {
         $telegramRequest = $this->resolveTelegramRequest($method, $endpoint, $params);
 
