@@ -60,7 +60,7 @@ trait Http
         return $this;
     }
 
-    protected function getLatestMethods(): array
+    public function getLatestMethods(): array
     {
         return $this->latestMethods;
     }
