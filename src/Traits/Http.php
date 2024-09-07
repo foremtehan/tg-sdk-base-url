@@ -41,6 +41,8 @@ trait Http
     /** @var TelegramResponse|null Stores the last request made to Telegram Bot API. */
     protected $lastResponse;
 
+    protected array $latestMethods = [];
+
     /** @var array Default parameters for the request. */
     protected $params;
 
@@ -56,6 +58,11 @@ trait Http
         $this->httpClientHandler = $httpClientHandler;
 
         return $this;
+    }
+
+    protected function getLatestMethods(): array
+    {
+        return $this->latestMethods;
     }
 
     /**
@@ -354,6 +361,8 @@ trait Http
     {
         $telegramRequest = $this->resolveTelegramRequest($method, $endpoint, $params);
 
+        $this->latestMethods[] = $endpoint;
+
         return $this->lastResponse = $this->getClient()->sendRequest($telegramRequest);
     }
 
@@ -406,7 +415,7 @@ trait Http
     private function normalizeParams(array $params, $fileUpload)
     {
         if ($this->params) {
-           $params = array_merge($this->params, $params);
+            $params = array_merge($this->params, $params);
         }
 
         if ($fileUpload) {
