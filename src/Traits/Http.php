@@ -361,9 +361,11 @@ trait Http
     {
         $telegramRequest = $this->resolveTelegramRequest($method, $endpoint, $params);
 
+        $this->lastResponse = $this->getClient()->sendRequest($telegramRequest);
+
         $this->latestMethods[] = $endpoint;
 
-        return $this->lastResponse = $this->getClient()->sendRequest($telegramRequest);
+        return $this->lastResponse;
     }
 
     /**
