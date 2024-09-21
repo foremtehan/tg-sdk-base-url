@@ -89,6 +89,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('initiate') => BotCantInitiateConversationException::class,
             $has('not enough rights') || $has('member list is inaccessible') => NotEnoughRightsException::class,
             $message == 'Unauthorized' || $has('SESSION_REVOKED') || $has('USER_DEACTIVATED') => UnauthorizedException::class,
+            ($data['error_code'] ?? null) >= 500 => TelegramServerErrorException::class,
             default => static::class
         };
 
