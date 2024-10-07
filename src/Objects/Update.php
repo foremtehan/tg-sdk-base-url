@@ -15,6 +15,8 @@ use Telegram\Bot\Objects\Payments\ShippingQuery;
  * @property Message|null $message                (Optional). New incoming message of any kind - text, photo, sticker, etc.
  * @property EditedMessage|null $editedMessage          (Optional). New version of a message that is known to the bot and was edited.
  * @property BusinessMessage|null $businessMessage          (Optional). New version of a message that is known to the business accounts.
+ * @property EditedBusinessMessage|null $editedBusinessMessage          (Optional). New version of a message that is known to the business accounts.
+ * @property BusinessMessagesDeleted|null $deletedBusinessMessages          Business Message Deleted.
  * @property Message|null $channelPost            (Optional). New incoming channel post of any kind — text, photo, sticker, etc.
  * @property EditedMessage|null $editedChannelPost      (Optional). New version of a channel post that is known to the bot and was edited sticker, etc.
  * @property InlineQuery|null $inlineQuery            (Optional). New incoming inline query.
@@ -112,6 +114,8 @@ class Update extends BaseObject
             'edited_message',
             'channel_post',
             'edited_channel_post',
+            'edited_business_message',
+            'business_message',
             'inline_query',
             'chosen_inline_result',
             'callback_query',
@@ -148,6 +152,8 @@ class Update extends BaseObject
             'pre_checkout_query' => $this->preCheckoutQuery,
             'poll' => $this->poll,
             'business_message' => $this->businessMessage,
+            'edited_business_message' => $this->editedBusinessMessage,
+            'deleted_business_messages' => $this->deletedBusinessMessages,
             default => collect(),
         };
     }
