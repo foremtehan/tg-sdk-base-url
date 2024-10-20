@@ -17,6 +17,7 @@ use Telegram\Bot\Objects\Payments\ShippingQuery;
  * @property BusinessMessage|null $businessMessage          (Optional). New version of a message that is known to the business accounts.
  * @property EditedBusinessMessage|null $editedBusinessMessage          (Optional). New version of a message that is known to the business accounts.
  * @property BusinessMessagesDeleted|null $deletedBusinessMessages          Business Message Deleted.
+ * @property BusinessConnection|null $businessConnection      (Optional). Describes the connection of the bot with a business account.
  * @property Message|null $channelPost            (Optional). New incoming channel post of any kind — text, photo, sticker, etc.
  * @property EditedMessage|null $editedChannelPost      (Optional). New version of a channel post that is known to the bot and was edited sticker, etc.
  * @property InlineQuery|null $inlineQuery            (Optional). New incoming inline query.
