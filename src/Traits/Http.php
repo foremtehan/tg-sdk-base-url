@@ -420,6 +420,12 @@ trait Http
             $params = array_merge($this->params, $params);
         }
 
+        foreach ($params as $k => $v) {
+            if (is_array($v)) {
+                $params[$k] = json_encode($v);
+            }
+        }
+
         if ($fileUpload) {
             return ['multipart' => $params];
         }
