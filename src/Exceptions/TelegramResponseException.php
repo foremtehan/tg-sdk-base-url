@@ -87,6 +87,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('not a member of') => BotNotMemberOfChatException::class,
             $has('QUOTE_TEXT_INVALID') => QuoteInvalidException::class,
             $has('initiate') => BotCantInitiateConversationException::class,
+            $has('CHANNEL_FORUM_MISSING') || $has('not a forum') => ForumMissingException::class,
             $has('not enough rights') || $has('member list is inaccessible') => NotEnoughRightsException::class,
             $message == 'Unauthorized' || $has('SESSION_REVOKED') || $has('USER_DEACTIVATED') => UnauthorizedException::class,
             ($data['error_code'] ?? null) >= 500 => TelegramServerErrorException::class,
