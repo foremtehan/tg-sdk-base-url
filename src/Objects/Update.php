@@ -152,7 +152,6 @@ class Update extends BaseObject
             'shipping_query' => $this->shippingQuery,
             'pre_checkout_query' => $this->preCheckoutQuery,
             'poll' => $this->poll,
-            'my_chat_member' => $this->myChatMember,
             'business_message' => $this->businessMessage,
             'edited_business_message' => $this->editedBusinessMessage,
             'deleted_business_messages' => $this->deletedBusinessMessages,
