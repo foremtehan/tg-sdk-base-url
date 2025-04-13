@@ -87,7 +87,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('not a member of') => BotNotMemberOfChatException::class,
             $has('QUOTE_TEXT_INVALID') => QuoteInvalidException::class,
             $has('initiate') => BotCantInitiateConversationException::class,
-            $has('thread not found') => ThreadNotFoundException::class,
+            $has('thread not found') || $has('TOPIC_ID_INVALID') => ThreadNotFoundException::class,
             $has('PARTICIPANT_ID_INVALID') => ParticipantInvalidException::class,
             $has('PEER_ID_INVALID') => PeerInvalidException::class,
             $has('member not found') => MemberNotFoundException::class,
