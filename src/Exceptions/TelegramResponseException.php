@@ -76,7 +76,7 @@ class TelegramResponseException extends TelegramSDKException
             $has('not a member of') => BotNotMemberOfChatException::class,
             $has('QUOTE_TEXT_INVALID') => QuoteInvalidException::class,
             $has('initiate') => BotCantInitiateConversationException::class,
-            $has('thread not found') || $has('TOPIC_ID_INVALID') => ThreadNotFoundException::class,
+            $has('thread not found') || $has('TOPIC_ID_INVALID') || $has('TOPIC_DELETED') => ThreadNotFoundException::class,
             $has('PARTICIPANT_ID_INVALID') => ParticipantInvalidException::class,
             $has('PEER_ID_INVALID') => PeerInvalidException::class,
             $has('member not found') => MemberNotFoundException::class,
@@ -94,7 +94,6 @@ class TelegramResponseException extends TelegramSDKException
 
     /**
      * Returns the HTTP status code.
-     *
      * @return int
      */
     public function getHttpStatusCode()
@@ -104,7 +103,6 @@ class TelegramResponseException extends TelegramSDKException
 
     /**
      * Returns the error type.
-     *
      * @return string
      */
     public function getErrorType(): string
@@ -114,7 +112,6 @@ class TelegramResponseException extends TelegramSDKException
 
     /**
      * Returns the raw response used to create the exception.
-     *
      * @return string
      */
     public function getRawResponse(): string
@@ -124,7 +121,6 @@ class TelegramResponseException extends TelegramSDKException
 
     /**
      * Returns the decoded response used to create the exception.
-     *
      * @return array
      */
     public function getResponseData(): array
@@ -134,7 +130,6 @@ class TelegramResponseException extends TelegramSDKException
 
     /**
      * Returns the response entity used to create the exception.
-     *
      * @return TelegramResponse
      */
     public function getResponse(): TelegramResponse
