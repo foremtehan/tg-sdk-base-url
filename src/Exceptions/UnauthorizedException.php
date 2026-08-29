@@ -2,7 +2,7 @@
 
 namespace Telegram\Bot\Exceptions;
 
-class UnauthorizedException extends TelegramResponseException
+class UnauthorizedException extends TelegramResponseException implements BotChatAccessException
 {
 
 }

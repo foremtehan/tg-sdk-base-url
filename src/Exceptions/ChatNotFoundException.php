@@ -4,7 +4,7 @@ namespace Telegram\Bot\Exceptions;
 
 use Telegram\Bot\Exceptions\TelegramResponseException;
 
-class ChatNotFoundException extends TelegramResponseException
+class ChatNotFoundException extends TelegramResponseException implements BotChatAccessException
 {
 
 }

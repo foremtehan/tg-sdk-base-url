@@ -2,7 +2,7 @@
 
 namespace Telegram\Bot\Exceptions;
 
-class BotKickedFromGroupException extends TelegramResponseException
+class BotKickedFromGroupException extends TelegramResponseException implements BotChatAccessException
 {
 
 }
